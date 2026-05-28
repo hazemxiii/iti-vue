@@ -1,0 +1,69 @@
+const { createApp } = Vue;
+
+createApp({
+    data() {
+        return {
+            books: [
+                {
+                    title: "Eleanor & Park",
+                    author: "Rainbow Rowell",
+                    isbn: "9780312610414",
+                    category: "Romance",
+                    pages: 324,
+                    price: 12,
+                    imageUrl: "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1341952742i/15745753.jpg"
+                },
+                {
+                    title: "The Sun Is Also a Star",
+                    author: "Nicola Yoon",
+                    isbn: "9781538761628",
+                    category: "Romance",
+                    pages: 270,
+                    price: 10,
+                    imageUrl: "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1459793538i/28763485.jpg"
+                },
+                {
+                    title: "Monstress, Volume 1: Awakening",
+                    author: "Marjorie Liu",
+                    isbn: "9781593076037",
+                    category: "Fantasy",
+                    pages: 40,
+                    price: 19,
+                    imageUrl: "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1728296393i/55883882.jpg"
+                },
+                {
+                    title: "Everything, Everything",
+                    author: "Nicola Yoon",
+                    isbn: "9781484738844",
+                    category: "Romance",
+                    pages: 270,
+                    price: 10,
+                    imageUrl: "https://m.media-amazon.com/images/S/compressed.photo.goodreads.com/books/1450515891i/18692431.jpg"
+                }
+            ],
+            wishlist: [],
+            showWishList: false,
+        }
+    },
+    methods: {
+        addToWishlist(book) {
+            if (!this.isInWishList(book)) {
+                this.wishlist.push(book);
+            }
+        },
+        removeFromWishlist(book) {
+            this.wishlist.splice(this.wishlist.indexOf(book), 1);
+        },
+        isInWishList(book) {
+            let out = this.wishlist.find((b) => b.isbn === book.isbn) ? true : false;
+            console.log(out);
+            return out;
+        }
+        ,formatPrice(price){
+            return new Intl.NumberFormat('en-SA', {
+                style: 'currency',
+                currency: 'SAR',
+            }).format(price)
+        }
+    }
+}).mount("#app");
